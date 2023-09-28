@@ -13,11 +13,13 @@ export function activate(context: vscode.ExtensionContext) {
     // 获取编辑器对象
     const editor = window.activeTextEditor;
     if (!editor) {
+      vscode.window.showErrorMessage(`No active text editor!`);
       return;
     }
 
     // 当前选中的代码所处的绝对位置
-    const protoPath = uri.fsPath;
+    // const protoPath = uri.fsPath;
+    const protoPath = editor.document.uri.fsPath;
     const protoFileName = path.basename(protoPath);
     console.log("protoFileName:", protoFileName);
     if (!protoFileName?.includes("proto")) {
@@ -38,7 +40,11 @@ export function activate(context: vscode.ExtensionContext) {
     const doc = editor.document;
     const selection = editor.selection;
     const words = doc.getText(selection);
-
+    console.log("selected words:", words);
+    if (!words) {
+      vscode.window.showErrorMessage(`Please selected text!`);
+      return;
+    }
     // 获取配置
     const config = vscode.workspace.getConfiguration("pb2api");
     const useTS = config.get("useTS", true);
@@ -61,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.window.showErrorMessage(error.message);
       return;
     }
-    console.log("apiStr", apiStr);
+    // console.log("apiStr", apiStr);
     // 写入
     writeStringToFile({ filePath: apiIndexPath, content: apiStr }, (err) => {
       if (err) {

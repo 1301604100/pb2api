@@ -2,7 +2,7 @@
   "name": "pb2api",
   "displayName": "pb2api",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.70.0"
   },
@@ -13,7 +13,9 @@
     "onLanguage:proto",
     "onLanguage:proto3"
   ],
+  "icon": "images/icon.png",
   "main": "./dist/extension.js",
+  "repository": "https://github.com/kary/pb2api",
   "contributes": {
     "commands": [
       {
@@ -26,9 +28,29 @@
         {
           "command": "pb2api.pb2api",
           "group": "modification",
-          "when": "editorHasSelection"
+          "when": "resourceExtname == .proto && editorHasSelection"
         }
       ]
+    },
+    "configuration": {
+      "title": "pb2api",
+      "type": "object",
+      "properties": {
+        "pb2api.useTS": {
+          "type": "boolean",
+          "default": true
+        },
+        "pb2api.projectServiceMap": {
+          "type": "object",
+          "default": {
+            "pcgo": "yunGame",
+            "chikii": "chikii",
+            "mita": "kaiheiyun",
+            "bikii": "bikii",
+            "hajimi": "hajimi"
+          }
+        }
+      }
     }
   },
   "publisher": "kary",
