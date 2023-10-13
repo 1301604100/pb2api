@@ -66,7 +66,7 @@ function getApiStr(info: {
   }
   const str = `
 ${annotation || ""}
-export const api${funcName} = (data${dataType}) ${returnType} => {
+export const api${funcName} = (data${dataType})${returnType} => {
   return request({
     url: apiUrl,
     reqDesction: '${reqDesction}',

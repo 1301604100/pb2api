@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 import * as path from "node:path";
+import * as os from "os";
 import { projectServiceMap } from "./config";
 import { generateApi, getServerName, writeStringToFile } from "./utils";
 const { window } = vscode;
@@ -17,9 +18,13 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
 
+    const PATH_SYMBOL = os.type() === "Windows_NT" ? "\\" : "/";
+
     // 当前选中的代码所处的绝对位置
     // const protoPath = uri.fsPath;
     const protoPath = editor.document.uri.fsPath;
+    console.log("protoPath:", protoPath);
+
     const protoFileName = path.basename(protoPath);
     console.log("protoFileName:", protoFileName);
     if (!protoFileName?.includes("proto")) {
@@ -30,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
     const apiIndexPath = path.resolve(protoPath, "../../api/index.ts");
     // 获取 项目名
     const projectPath = path.resolve(protoPath, "../../../");
-    const projectName = projectPath.split("\\").at(-1);
+    const projectName = projectPath.split(PATH_SYMBOL).at(-1);
     if (!projectName) {
       vscode.window.showErrorMessage("can not find project name");
       return;
