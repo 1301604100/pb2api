@@ -2,7 +2,7 @@
   "name": "pb2api",
   "displayName": "pb2api",
   "description": "",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.70.0"
   },
@@ -32,6 +32,14 @@
         }
       ]
     },
+    "keybindings": [
+      {
+        "command": "pb2api.pb2api",
+        "key": "ctrl+k ctrl+a",
+        "mac": "cmd+k cmd+a",
+        "when": "resourceExtname == .proto && editorHasSelection"
+      }
+    ],
     "configuration": {
       "title": "pb2api",
       "type": "object",

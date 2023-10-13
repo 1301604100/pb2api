@@ -83,9 +83,8 @@ export function activate(context: vscode.ExtensionContext) {
           `Error appending to ${apiIndexPath}: ${err.message}`
         );
       } else {
-        vscode.window.showInformationMessage(
-          `Appended to ${apiIndexPath} successfully!`
-        );
+        // `Appended to ${apiIndexPath} successfully!`
+        vscode.window.showInformationMessage("success");
       }
     });
   });
