@@ -33,6 +33,8 @@ export function activate(context: vscode.ExtensionContext) {
     }
     // api/index.ts 的绝对目录
     const apiIndexPath = path.resolve(protoPath, "../../api/index.ts");
+    console.log("apiIndexPath:", apiIndexPath);
+
     // 获取 项目名
     const projectPath = path.resolve(protoPath, "../../../");
     const projectName = projectPath.split(PATH_SYMBOL).at(-1);
@@ -40,7 +42,8 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.window.showErrorMessage("can not find project name");
       return;
     }
-    console.log("projectPath, projectDir", projectPath, projectName);
+    console.log("projectPath", projectPath);
+    console.log("projectName", projectName);
     // 获取选中文本
     const doc = editor.document;
     const selection = editor.selection;
